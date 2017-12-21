@@ -16,10 +16,6 @@ void voiture(int n) {
     verrou_peage.lock();
     std::cout << "la voiture " << std::this_thread::get_id() << ", entre pour payer" << std::endl;
     
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(1,6);
-    int dice_roll = distribution(generator);  // generates number in the range 1..6
-    
     // random
     static std::default_random_engine re {};
     using Dist = std::uniform_int_distribution<int>;
