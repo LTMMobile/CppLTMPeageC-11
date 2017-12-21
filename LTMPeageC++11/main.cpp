@@ -32,19 +32,23 @@ std::thread * tab[max_voiture];
 int main(int argc, const char * argv[]) {
 
     int nb_voiture = 0;
+    std::thread tab_thread[max_voiture];
+    
     std::cout << "Entrez le nombre de voiture ?" << std::endl;
     std::cin >> nb_voiture;
     
     if( nb_voiture > 0 && nb_voiture < max_voiture ) {
         //
         for( int t = 0; t < nb_voiture; t++ ) {
-            tab[t] = new std::thread {std::bind(voiture, t)};
+            //tab[t] = new std::thread {std::bind(voiture, t)};
+            tab_thread[t] = std::thread { std::bind(voiture, t) };
         }
         
         for ( int i=0; i < nb_voiture; i++ ) {
-            tab[i]->join();
-            delete tab[i];
-            tab[i] = nullptr;
+            tab_thread[i].join();
+            //tab[i]->join();
+            //delete tab[i];
+            //tab[i] = nullptr;
         }
     }else {
         std::cout << "cas invalide" << std::endl;
